@@ -52,10 +52,10 @@ public class StudentController {
         boolean deleted = studentService.deleteStudent(id);
 
         if (!deleted) {
-            return ResponseEntity.status(404).body("Student not found");
+            return ResponseEntity.status(404).body("Student is not found.");
         }
 
-        return ResponseEntity.status(200).body("Student deleted successfully");
+        return ResponseEntity.status(200).body("Student got deleted successfully");
     }
 
 }
