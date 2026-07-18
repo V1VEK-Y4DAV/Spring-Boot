@@ -4,6 +4,8 @@ import com.mohit.demo.StudentServer.Entity.Student;
 import com.mohit.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 
 public class StudentService {
@@ -19,6 +21,10 @@ public class StudentService {
         if(id<0 || age<0 || name==null || dep==null){
             return null;
         }
+
+        student.setCreatedAt(LocalDateTime.now());
+        student.setUpdatedAt(LocalDateTime.now());
+
         studentRepository.save(student);
         return student;
     }
@@ -37,6 +43,7 @@ public class StudentService {
         existingStudent.setName(student.getName());
         existingStudent.setAge(student.getAge());
         existingStudent.setDep(student.getDep());
+        existingStudent.setUpdatedAt(LocalDateTime.now());
 
         studentRepository.save(existingStudent);
 
