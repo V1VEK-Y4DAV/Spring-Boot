@@ -296,7 +296,7 @@
         <div class="punch"></div>
         <div class="status-tag">POST /create</div>
         <div class="card-title">New Student Card</div>
-        <p class="card-desc">File a new record into the drawer.</p>
+        <p class="card-desc">File a new record into the drawer. The ID is assigned by the registrar automatically.</p>
 
         <div class="row-2">
             <div class="field">
@@ -304,19 +304,13 @@
                 <input id="c-name" type="text" placeholder="e.g. Your Name">
             </div>
             <div class="field">
-                <label for="c-id">Student ID</label>
-                <input id="c-id" type="text" placeholder="e.g. XXXXXXXX">
-            </div>
-        </div>
-        <div class="row-2">
-            <div class="field">
                 <label for="c-age">Age</label>
                 <input id="c-age" type="number" min="0" placeholder="e.g. 18">
             </div>
-            <div class="field">
-                <label for="c-dep">Department</label>
-                <input id="c-dep" type="text" placeholder="e.g. Computer Science">
-            </div>
+        </div>
+        <div class="field">
+            <label for="c-dep">Department</label>
+            <input id="c-dep" type="text" placeholder="e.g. Computer Science">
         </div>
 
         <div class="actions">
@@ -438,10 +432,9 @@
     // ---- CREATE ----
     function createStudent() {
         const payload = {
-            id: document.getElementById('c-id').value.trim(),
             name: document.getElementById('c-name').value.trim(),
-            age: document.getElementById('c-age').value.trim(),
-            dep: document.getElementById('c-dep').value.trim(),
+            age: Number(document.getElementById('c-age').value),
+            department: document.getElementById('c-dep').value.trim()
         };
         callApi(`${base()}/create`, {
             method: 'POST',
@@ -462,17 +455,17 @@
         const id = document.getElementById('u-id').value.trim();
         const name = document.getElementById('u-name').value.trim();
         const age = document.getElementById('u-age').value.trim();
-        const dep = document.getElementById('u-dep').value.trim();
+        const department = document.getElementById('u-dep').value.trim();
 
         if (!id) return showResult('result-update', false, 'Enter a student ID first.');
-        if (!name || !age || !dep) {
+        if (!name || !age || !department) {
             return showResult('result-update', false, 'This endpoint overwrites the whole record — fill in name, age, and department.');
         }
 
         callApi(`${base()}/updateStudent/${encodeURIComponent(id)}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, age, dep }),
+            body: JSON.stringify({ name, age: Number(age), department }),
         }, 'result-update');
     }
 
