@@ -2,8 +2,11 @@ package com.mohit.demo.StudentServer.Controller;
 
 import com.mohit.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.mohit.demo.StudentServer.DTO.CreateStudentResponseDTO;
+import com.mohit.demo.StudentServer.DTO.UpdateStudentRequestDTO;
+import com.mohit.demo.StudentServer.DTO.UpdateStudentResponseDTO;
 import com.mohit.demo.StudentServer.Entity.Student;
 import com.mohit.demo.StudentServer.Service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +22,7 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> storeStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
+    public ResponseEntity<?> storeStudent(@Valid @RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
         CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
 
         if(result == null)
@@ -30,25 +33,26 @@ public class StudentController {
     }
 
     @GetMapping("/getStudent/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable int id) throws Exception{
+    public ResponseEntity<?> getStudentById(@PathVariable int id)  {
 
         Student student = studentService.getStudentById(id);
-
-        if(student == null){
-            return ResponseEntity.status(404).body("Student not found");
-        }
 
         return ResponseEntity.ok(student);
     }
 
     @PutMapping("/updateStudent/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable int id, @RequestBody Student student){
-        Student result = studentService.studentUpdate(id, student);
-        if(result == null)
-        {
-            return ResponseEntity.status(400).body("Invalid input");
+    public ResponseEntity<?> updateStudent(
+            @PathVariable int id,
+            @RequestBody UpdateStudentRequestDTO updateStudentRequestDTO) {
+
+        UpdateStudentResponseDTO result =
+                studentService.studentUpdate(id, updateStudentRequestDTO);
+
+        if (result == null) {
+            return ResponseEntity.status(404).body("Student not found");
         }
-        return ResponseEntity.status(200).body(result);
+
+        return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/deleteStudent/{id}")
@@ -60,12 +64,3 @@ public class StudentController {
         return ResponseEntity.status(200).body("Student deleted");
     }
 }
-
-
-
-
-
-
-
-
-

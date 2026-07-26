@@ -1,6 +1,7 @@
 package com.mohit.demo.StudentServer.DTO;
 
-public class CreateStudentResponseDTO {
+public class UpdateStudentResponseDTO {
+
     private int id;
     private String name;
     private int age;
