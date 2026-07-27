@@ -63,6 +63,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/hello").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/users/create").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
