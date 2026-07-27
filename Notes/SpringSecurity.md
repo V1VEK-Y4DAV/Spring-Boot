@@ -1016,3 +1016,28 @@ Response
 ```
 
 This is the complete authentication and authorization lifecycle for a Spring Boot application using Spring Security with HTTP Basic or Form Login.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+	 ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 //	 Student student =  context.getBean(Student.class);
 //	 student.setName("Rahul");
 //	 student.setAge(30);

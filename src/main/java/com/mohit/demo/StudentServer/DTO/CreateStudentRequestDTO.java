@@ -3,7 +3,11 @@ package com.mohit.demo.StudentServer.DTO;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class CreateStudentRequestDTO {
 
     @NotBlank(message = "Name cannot be empty")
@@ -14,28 +18,4 @@ public class CreateStudentRequestDTO {
     @NotBlank(message = "Department cannot be empty")
     @Size(min = 2, max = 50, message = "Department must be between 2 and 50 characters")
     private String department;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 }

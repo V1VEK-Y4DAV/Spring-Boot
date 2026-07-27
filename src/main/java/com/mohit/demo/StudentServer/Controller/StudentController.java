@@ -27,7 +27,7 @@ public class StudentController {
 
         if(result == null)
         {
-            return ResponseEntity.status(400).body("Invalid input");
+           return ResponseEntity.status(400).body("Invalid input");
         }
         return  ResponseEntity.status(201).body(result);
     }
